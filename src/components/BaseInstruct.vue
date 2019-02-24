@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-cloak>{{cloak}}</div>
-    <h2 v-text="msg" ></h2>
+    <h2 v-text="msg"></h2>
     <div v-html="html"></div>
     <div v-bind:title="title">v-bind:title后边的内容会被当做js表达式来解析; v-bind:title简写为 :title”</div>
     <h2 @click="alert">click me</h2>
@@ -36,7 +36,6 @@ export default {
       }, 500);
     },
     closeInterval() {
-      console.log(this);
       clearInterval(this.interval);
       this.interval = null;
     }
