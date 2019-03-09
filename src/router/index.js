@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld';
 import BaseInstruct from "@/components/BaseInstruct";
 import Animate from "@/components/Animate";
+import FilterAndFocus from "@/components/FilterAndFocus";
 
 Vue.use(Router)
 
@@ -10,16 +11,16 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      redirect:"/filterandfocus"
     },{
       path:"/baseInstruct",
-      name:"BaseInstruct",
       component:BaseInstruct
     },{
       path:"/animate",
-      name:"Animate",
-      component:Animate
+      component:Animate  
+    },{
+      path:"/filterandfocus",
+      component:FilterAndFocus
     }
   ]
 })
