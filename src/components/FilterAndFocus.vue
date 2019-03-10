@@ -6,7 +6,7 @@
       <label for="name">name</label>
       <input id="name" type="text" v-model="name">
       <button @click="add">添加</button>
-      <input id="keycode" v-model="keycode" type="text">
+      <input id="keycode" v-model="keycode" type="text" v-focus>
     </div>
     <table border="1" cellspacing="0">
       <tr>
@@ -29,6 +29,11 @@
   </div>
 </template>
 <script>
+
+ 
+
+
+
 export default {
   data() {
     return {
@@ -63,7 +68,13 @@ export default {
         return item.name.indexOf(this.keycode) != -1;
       });
     }
-  }
+  },
+  created() {
+    // console.log(this.$refs.focusInput) //内存中的模板尚未插入到页面中，无法拿到dom
+  },
+  mounted() {
+    console.log(this.$refs.focusInput); //内存中的模板已经插入到页面中，可以拿到原生的dom对象
+  },
 };
 </script>
 
