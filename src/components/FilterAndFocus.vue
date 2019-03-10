@@ -16,7 +16,7 @@
         <th>CreateTime</th>
         <th>Action</th>
       </tr>
-      <tr v-for="(item,index) in list" :key="item.id">
+      <tr v-for="(item,index) in search(keycode)" :key="index">
         <td>{{index}}</td>
         <td>{{item.id}}</td>
         <td>{{item.name}}</td>
@@ -43,15 +43,25 @@ export default {
   },
   methods: {
     add: function() {
+      if (this.name == "" || this.id == "") {
+        return;
+      }
       console.log("add");
       this.list.unshift({
         id: this.id,
         name: this.name,
         createTime: new Date().getTime()
       });
+      this.name = "";
+      this.id = "";
     },
     del: function(index) {
       this.list.splice(index, 1);
+    },
+    search(keycode) {
+      return this.list.filter(item => {
+        return item.name.indexOf(this.keycode) != -1;
+      });
     }
   }
 };
