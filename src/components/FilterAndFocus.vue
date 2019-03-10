@@ -6,7 +6,7 @@
       <label for="name">name</label>
       <input id="name" type="text" v-model="name">
       <button @click="add">添加</button>
-      <input id="keycode" v-model="keycode" type="text" v-focus>
+      <input id="keycode" v-model="keycode" type="text" v-focus v-color v-size>
     </div>
     <table border="1" cellspacing="0">
       <tr>
@@ -29,11 +29,6 @@
   </div>
 </template>
 <script>
-
- 
-
-
-
 export default {
   data() {
     return {
@@ -46,6 +41,23 @@ export default {
       ]
     };
   },
+  // 私有的自定义指令,私有的带s,是一个对象，使用时必须带v- 写法和filters一样
+  directives: {
+    color: {
+      //color是指令名字
+      bind(el) {
+        el.style.color = "red"; //样式不需要在inserted时使用,el是一个原生dom对象，生成的是内联样式
+      },
+      inserted() {},
+      updated() {}
+    },
+    size: {
+      bind(el) {
+        el.style.fontSize = "30px";
+      }
+    }
+  },
+
   methods: {
     add: function() {
       if (this.name == "" || this.id == "") {
@@ -74,7 +86,7 @@ export default {
   },
   mounted() {
     console.log(this.$refs.focusInput); //内存中的模板已经插入到页面中，可以拿到原生的dom对象
-  },
+  }
 };
 </script>
 

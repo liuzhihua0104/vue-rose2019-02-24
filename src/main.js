@@ -14,7 +14,7 @@ Vue.config.productionTip = false;
 Vue.directive("focus", {
   bind() { },//指令绑定到元素上时执行一次
   inserted(el) { //指令插入到dom中时执行一次
-    el.focus(); //el是一个原生的dom对象，想要获取焦点必须放到inserted中才行
+    el.focus(); //el是一个原生的dom对象，想要获取焦点必须放到inserted中才行,行为类的都需要把元素放到dom中才能执行，样式类的直接写在bind中
   },
   updated() { },//vnode更新时会执行，可能会触发多次
 })
