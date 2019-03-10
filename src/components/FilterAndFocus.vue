@@ -7,17 +7,17 @@
       <input id="name" type="text" v-model="name">
       <button @click="add">添加</button>
       <!-- 自定义指令传值时注意如果是一个字符串注意打引号 -->
-      <input id="keycode" v-model="keycode" type="text" v-focus v-color v-size v-bgcolor="'red'">
+      <input id="keycode" v-fontWeight="900" v-model="keycode" type="text" v-focus v-color v-size v-bgcolor="'yellow'">
     </div>
-    <table border="1" cellspacing="0">
-      <tr>
+    <table border="1" cellspacing="0" >
+      <tr >
         <th>index</th>
         <th>ID</th>
         <th>Name</th>
         <th>CreateTime</th>
         <th>Action</th>
       </tr>
-      <tr v-for="(item,index) in search(keycode)" :key="index">
+      <tr v-for="(item,index) in search(keycode)" :key="index" v-fontWeight="200">
         <td>{{index}}</td>
         <td>{{item.id}}</td>
         <td>{{item.name}}</td>
@@ -44,6 +44,7 @@ export default {
   },
   // 私有的自定义指令,私有的带s,是一个对象，使用时必须带v- 写法和filters一样
   directives: {
+    // 自定义指令定义颜色
     color: {
       //color是指令名字
       bind(el) {
@@ -52,25 +53,31 @@ export default {
       inserted() {},
       updated() {}
     },
+    // 定义文字大小
     size: {
       bind(el) {
         el.style.fontSize = "30px";
       }
     },
-
+    // 定义背景颜色
     bgcolor: {
       bind(el, bindValue) {
         console.log(bindValue);
         // 输出如下信息
         // def: {bind: ƒ}
-        // expression: "'red'"
+        // expression: "'yellow'"
         // modifiers: {}
         // name: "bgcolor"
         // rawName: "v-bgcolor"
-        // value: "red"
+        // value: "yellow"
 
         el.style.background = bindValue.value;
       }
+    },
+    // 自定义指令的简写形式,函数形式的写法，相当于同时注册了bind & updated方法 ,更新时能看到效果
+    fontWeight: function(el, binding) {
+      // console.log(binding)
+      el.style.fontWeight=parseInt(binding.value);
     }
   },
 
@@ -101,7 +108,7 @@ export default {
     // console.log(this.$refs.focusInput) //内存中的模板尚未插入到页面中，无法拿到dom
   },
   mounted() {
-    console.log(this.$refs.focusInput); //内存中的模板已经插入到页面中，可以拿到原生的dom对象
+    // console.log(this.$refs.focusInput); //内存中的模板已经插入到页面中，可以拿到原生的dom对象
   }
 };
 </script>
