@@ -6,7 +6,8 @@
       <label for="name">name</label>
       <input id="name" type="text" v-model="name">
       <button @click="add">添加</button>
-      <input id="keycode" v-model="keycode" type="text" v-focus v-color v-size>
+      <!-- 自定义指令传值时注意如果是一个字符串注意打引号 -->
+      <input id="keycode" v-model="keycode" type="text" v-focus v-color v-size v-bgcolor="'red'">
     </div>
     <table border="1" cellspacing="0">
       <tr>
@@ -54,6 +55,21 @@ export default {
     size: {
       bind(el) {
         el.style.fontSize = "30px";
+      }
+    },
+
+    bgcolor: {
+      bind(el, bindValue) {
+        console.log(bindValue);
+        // 输出如下信息
+        // def: {bind: ƒ}
+        // expression: "'red'"
+        // modifiers: {}
+        // name: "bgcolor"
+        // rawName: "v-bgcolor"
+        // value: "red"
+
+        el.style.background = bindValue.value;
       }
     }
   },
