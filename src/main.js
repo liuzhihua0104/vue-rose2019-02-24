@@ -9,6 +9,11 @@ Vue.prototype.$moment = moment;
 
 Vue.config.productionTip = false;
 
+// vue项目中使用animate.css第三方动画 参考地址  https://blog.csdn.net/qq_39009348/article/details/81144296
+
+import animated from "animate.css";
+Vue.use(animated);
+
 
 // 定义全局的自定义指令,使用全局自定义指令时,focus需要在标签上加上v-使用，即为v-focus
 Vue.directive("focus", {
